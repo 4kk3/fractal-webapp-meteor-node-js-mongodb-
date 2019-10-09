@@ -1,4 +1,15 @@
 body {
-  padding: 10px;
-  font-family: sans-serif;
+	padding: 10px;
+	font-family: sans-serif;
+}
+.spectrum {
+	display: block;
+	width: 150px;
+	height: 15px;
+	margin: 0 0 -3px 7px;
+	background: -webkit-linear-gradient(left, hsl(0,100%,50%),hsl(60,100%, 50%), hsl(120,100%, 50%), hsl(180, 100%, 50%), hsl(240,100%,50%),hsl(300,100%,50%) 100%); 
+}
+input[type=range] {
+	width: 161px;
+	margin-top: -5px;
 }

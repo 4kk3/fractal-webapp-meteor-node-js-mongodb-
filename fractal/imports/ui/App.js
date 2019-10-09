@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Fractal from './Fractal.js';
+import FractalOptions from './FractalOptions.js';
 
 // App component - represents the whole app
 
@@ -11,7 +11,7 @@ export default class App extends Component {
         			<header>
           				<h1>Fractal</h1>
         			</header>
-				<Fractal/>
+				<FractalOptions/>
       			</div>
     		);
   	}
