@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 
 export default class Fractal extends Component {
-	 componentDidMount() {
-			//Instantiate Canvas
-                        var canvas = this.refs.canvas;
-                        var ctx = canvas.getContext("2d");
-			canvas.width = 600;
-			canvas.height = 600;
-			
-			//Draw Canvas
-			this.generateMandelbrot(canvas, ctx);
+	
+	componentDidMount() {
+		 //Instantiate Canvas
+                var canvas = this.refs.canvas;
+                var ctx = canvas.getContext("2d");
+                canvas.width = 600;
+                canvas.height = 600;
+
+                //Draw Canvas
+                this.generateMandelbrot(canvas, ctx);
+		this.state = {
+		
+		}
+	}
+
+
+	 generate() {
+		//Instantiate Canvas
+		canvas.width = 600;
+		canvas.height = 600;
+		
+		//Draw Canvas
+		this.generateMandelbrot(canvas, ctx);
 	}
 	//Mandelbrot
 	generateMandelbrot(canvas, ctx) {
@@ -56,8 +70,11 @@ export default class Fractal extends Component {
 	//Mandelbrot
 	render() {
     		return (
-			<canvas ref = "canvas"/>
-    		);
+			<div className = "container">
+				<canvas ref = "canvas"/>
+				<button onClick = {this.generate}>Generate</button>
+    			</div>
+		);
   	}
 }
 
