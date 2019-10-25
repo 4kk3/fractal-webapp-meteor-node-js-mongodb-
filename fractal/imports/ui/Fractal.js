@@ -1,35 +1,41 @@
 import React, { Component } from 'react';
 
 export default class Fractal extends Component {
-	
+	constructor(props) {
+		super(props);
+		this.state = {
+			width: 500,
+			height: 500
+		};
+		this.handleChange = this.handleChange.bind(this);
+		this.generate = this.generate.bind(this);
+	}
 	componentDidMount() {
-		 //Instantiate Canvas
+		//Instantiate Canvas
                 var canvas = this.refs.canvas;
                 var ctx = canvas.getContext("2d");
-                canvas.width = 600;
-                canvas.height = 600;
+                canvas.width = this.state.width;
+                canvas.height = this.state.height;
 
                 //Draw Canvas
                 this.generateMandelbrot(canvas, ctx);
-		this.state = {
-		
-		}
 	}
+	generate() {
+		var canvas = this.refs.canvas;
+		var ctx  = canvas.getContext("2d");
+                canvas.width = this.state.width;
+                canvas.height = this.state.height;
 
-
-	 generate() {
-		//Instantiate Canvas
-		canvas.width = 600;
-		canvas.height = 600;
-		
-		//Draw Canvas
 		this.generateMandelbrot(canvas, ctx);
+	}
+	handleChange(event) {
+		this.setState({[event.target.name]: event.target.value});
 	}
 	//Mandelbrot
 	generateMandelbrot(canvas, ctx) {
 		var magnificationFactor = 200;
-		var panX = 2;
-		var panY = 1.5;
+		var panX = 3;
+		var panY = 1.35;
                 for(var x = 0; x < canvas.width; x++) {
                 	for(var y = 0; y < canvas.height; y++) {
                         	var belongsToSet = this.checkIfBelongsToMandelbrotSet(x/magnificationFactor - panX, y/magnificationFactor - panY);
@@ -49,7 +55,6 @@ export default class Fractal extends Component {
                         }
 		}
 	}
-
 	checkIfBelongsToMandelbrotSet(x,y) {
     		var realComponentOfResult = x;
     		var imaginaryComponentOfResult = y;
@@ -67,11 +72,16 @@ export default class Fractal extends Component {
     		}
     		return 0;   // Return zero if in set        
 	}       
-	//Mandelbrot
 	render() {
     		return (
 			<div className = "container">
 				<canvas ref = "canvas"/>
+				<form>
+					Width:<br/>
+					<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange}/><br/>
+					Height:<br/>
+					<input type = "number" name = "height" value = {this.state.y} onChange = {this.handleChange}/><br/>
+				</form>
 				<button onClick = {this.generate}>Generate</button>
     			</div>
 		);
