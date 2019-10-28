@@ -4,11 +4,13 @@ export default class Fractal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			width: 500,
-			height: 500
+			width: 600,
+			height: 600,
+			iterations: 100
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.generate = this.generate.bind(this);
+		this.checkIfBelongsToMandelbrotSet = this.checkIfBelongsToMandelbrotSet.bind(this);
 	}
 	componentDidMount() {
 		//Instantiate Canvas
@@ -58,7 +60,7 @@ export default class Fractal extends Component {
 	checkIfBelongsToMandelbrotSet(x,y) {
     		var realComponentOfResult = x;
     		var imaginaryComponentOfResult = y;
-    		var maxIterations = 100;
+    		var maxIterations = this.state.iterations;
     		for(var i = 0; i < maxIterations; i++) {
          		var tempRealComponent = realComponentOfResult * realComponentOfResult - imaginaryComponentOfResult * imaginaryComponentOfResult + x;
          		var tempImaginaryComponent = 2 * realComponentOfResult * imaginaryComponentOfResult + y;
@@ -77,10 +79,12 @@ export default class Fractal extends Component {
 			<div className = "container">
 				<canvas ref = "canvas"/>
 				<form>
-					Width:<br/>
-					<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange}/><br/>
-					Height:<br/>
+					Resolution:<br/>
+					<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange}/>
+					x
 					<input type = "number" name = "height" value = {this.state.y} onChange = {this.handleChange}/><br/>
+					Iterations:<br/>
+					<input type = "number" name = "iterations" value = {this.state.iterations} onChange = {this.handleChange}/><br/>
 				</form>
 				<button onClick = {this.generate}>Generate</button>
     			</div>
