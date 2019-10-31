@@ -6,12 +6,18 @@ export default class Fractal extends Component {
 		this.state = {
 			width: 600,
 			height: 600,
-			iterations: 100
+			iterations: 100,
+			zoom: 200,
+			focused: false,
+			generate: false
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.generate = this.generate.bind(this);
 		this.checkIfBelongsToMandelbrotSet = this.checkIfBelongsToMandelbrotSet.bind(this);
-	}
+		this.generateMandelbrot = this.generateMandelbrot.bind(this);
+		this.onBlur = this.onBlur.bind(this);
+		this.onFocus = this.onFocus.bind(this);
+ 	}
 	componentDidMount() {
 		//Instantiate Canvas
                 var canvas = this.refs.canvas;
@@ -21,6 +27,11 @@ export default class Fractal extends Component {
 
                 //Draw Canvas
                 this.generateMandelbrot(canvas, ctx);
+	}
+	componentDidUpdate() {
+		if (this.state.generate == true && this.state.focused == false) {
+			this.generate();
+		}
 	}
 	generate() {
 		var canvas = this.refs.canvas;
@@ -32,10 +43,22 @@ export default class Fractal extends Component {
 	}
 	handleChange(event) {
 		this.setState({[event.target.name]: event.target.value});
+		this.setState({generate: true})
+	}
+	handleClick(event) {
+	
+	}
+	onBlur() {
+		this.setState({focused: false});
+		console.log(this.state.focused);	
+	}
+	onFocus() {
+		this.setState({focused: true});
+		console.log(this.state.focused);
 	}
 	//Mandelbrot
 	generateMandelbrot(canvas, ctx) {
-		var magnificationFactor = 200;
+		var magnificationFactor = this.state.zoom;
 		var panX = 3;
 		var panY = 1.35;
                 for(var x = 0; x < canvas.width; x++) {
@@ -77,18 +100,25 @@ export default class Fractal extends Component {
 	render() {
     		return (
 			<div className = "container">
+				<button name = "Up" onClick = {this.handleClick}>Up</button>
+				<button name = "Left" onClick = {this.handleClick}>Left</button>
+				<button name = "Right" onClick = {this.handleClick}>Right</button>
+				<button name = "Down" onClick = {this.handleClick}>Down</button>
 				<canvas ref = "canvas"/>
 				<form>
 					Resolution:<br/>
-					<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange}/>
+					<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/>
 					x
-					<input type = "number" name = "height" value = {this.state.y} onChange = {this.handleChange}/><br/>
+					<input type = "number" name = "height" value = {this.state.y} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 					Iterations:<br/>
-					<input type = "number" name = "iterations" value = {this.state.iterations} onChange = {this.handleChange}/><br/>
+					<input type = "number" name = "iterations" value = {this.state.iterations} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+					Zoom:<br/>
+					<input type = "number" name = "zoom" value = {this.state.zoom} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 				</form>
-				<button onClick = {this.generate}>Generate</button>
+				
     			</div>
 		);
   	}
 }
+
 
