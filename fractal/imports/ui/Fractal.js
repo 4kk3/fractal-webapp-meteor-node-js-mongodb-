@@ -9,7 +9,9 @@ export default class Fractal extends Component {
 			iterations: 100,
 			zoom: 200,
 			focused: false,
-			generate: false
+			generate: false,
+			panx: 3,
+			pany: 1.35
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.generate = this.generate.bind(this);
@@ -17,6 +19,7 @@ export default class Fractal extends Component {
 		this.generateMandelbrot = this.generateMandelbrot.bind(this);
 		this.onBlur = this.onBlur.bind(this);
 		this.onFocus = this.onFocus.bind(this);
+		this.handleClick = this.handleClick.bind(this);
  	}
 	componentDidMount() {
 		//Instantiate Canvas
@@ -46,7 +49,18 @@ export default class Fractal extends Component {
 		this.setState({generate: true})
 	}
 	handleClick(event) {
-	
+		switch ([event.target.name][0]) {
+			case "up":
+				this.setState({pany: this.state.pany + 0.01});
+			case "left":
+				this.setState({panx: this.state.panx - 0.01});
+			case "right":
+				this.setState({panx: this.state.panx + 0.01});
+				console.log(this.state.panx);
+			case "down":
+				this.setState({pany: this.state.pany - 0.01});
+				console.log(this.state.pany); 
+		}
 	}
 	onBlur() {
 		this.setState({focused: false});
@@ -59,8 +73,8 @@ export default class Fractal extends Component {
 	//Mandelbrot
 	generateMandelbrot(canvas, ctx) {
 		var magnificationFactor = this.state.zoom;
-		var panX = 3;
-		var panY = 1.35;
+		var panX = this.state.panx;
+		var panY = this.state.pany;
                 for(var x = 0; x < canvas.width; x++) {
                 	for(var y = 0; y < canvas.height; y++) {
                         	var belongsToSet = this.checkIfBelongsToMandelbrotSet(x/magnificationFactor - panX, y/magnificationFactor - panY);
@@ -100,10 +114,10 @@ export default class Fractal extends Component {
 	render() {
     		return (
 			<div className = "container">
-				<button name = "Up" onClick = {this.handleClick}>Up</button>
-				<button name = "Left" onClick = {this.handleClick}>Left</button>
-				<button name = "Right" onClick = {this.handleClick}>Right</button>
-				<button name = "Down" onClick = {this.handleClick}>Down</button>
+				<button name = "up" onClick = {this.handleClick}>Up</button>
+				<button name = "left" onClick = {this.handleClick}>Left</button>
+				<button name = "right" onClick = {this.handleClick}>Right</button>
+				<button name = "down" onClick = {this.handleClick}>Down</button>
 				<canvas ref = "canvas"/>
 				<form>
 					Resolution:<br/>
