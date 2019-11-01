@@ -4,14 +4,16 @@ export default class Fractal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			width: 600,
-			height: 600,
+			width: 1920,
+			height: 1080,
 			iterations: 100,
-			zoom: 200,
+			zoom: 400,
 			focused: false,
 			generate: false,
 			panx: 3,
-			pany: 1.35
+			pany: 1.35,
+			color: 0,
+			resetvalues: []
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.generate = this.generate.bind(this);
@@ -20,8 +22,10 @@ export default class Fractal extends Component {
 		this.onBlur = this.onBlur.bind(this);
 		this.onFocus = this.onFocus.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.reset = this.reset.bind(this);
  	}
 	componentDidMount() {
+		this.setState({resetvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
 		//Instantiate Canvas
                 var canvas = this.refs.canvas;
                 var ctx = canvas.getContext("2d");
@@ -49,21 +53,30 @@ export default class Fractal extends Component {
 		this.setState({generate: true})
 	}
 	handleClick(event) {
-		console.log([event.target.name][0]);
 		switch ([event.target.name][0]) {
 			case "up":
-				this.setState({pany: this.state.pany + 0.01});
+				this.setState({pany: this.state.pany + 0.1});
 				break;
 			case "left":
-				this.setState({panx: this.state.panx - 0.01});
+				this.setState({panx: this.state.panx + 0.1});
 				break;
 			case "right":
-				this.setState({panx: this.state.panx + 0.01});
+				this.setState({panx: this.state.panx - 0.1});
 				break;
 			case "down":
-				this.setState({pany: this.state.pany - 0.01});
+				this.setState({pany: this.state.pany - 0.1});
 				break; 
 		}
+		this.generate();
+	}
+	reset() {
+		this.setState({width: this.state.resetvalues[0]});
+		this.setState({height: this.state.resetvalues[1]});
+		this.setState({iterations: this.state.resetvalues[2]});
+		this.setState({zoom: this.state.resetvalues[3]});
+		this.setState({panx: this.state.resetvalues[4]});
+		this.setState({pany: this.state.resetvalues[5]});
+		this.setState({color: this.state.resetvalues[6]});
 		this.generate();
 	}
 	onBlur() {
@@ -85,11 +98,11 @@ export default class Fractal extends Component {
     					ctx.fillRect(x, y, 1, 1); // Draw a black pixel
 				} else {
 					if (belongsToSet > 50) {
-						ctx.fillStyle = 'hsl(0, 100%, 50%)';
+						ctx.fillStyle = 'hsl(' + this.state.color.toString() +  ', 100%, 50%)';
 						ctx.fillRect(x, y, 1, 1);
 					}
 					else {
-    						ctx.fillStyle = 'hsl(0, 100%, ' + belongsToSet + '%)';
+    						ctx.fillStyle = 'hsl(' + this.state.color.toString() +  ', 100%, ' + belongsToSet + '%)';
     						ctx.fillRect(x, y, 1, 1); // Draw a colorful pixel
 					}
 				}
@@ -130,8 +143,10 @@ export default class Fractal extends Component {
 					<input type = "number" name = "iterations" value = {this.state.iterations} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 					Zoom:<br/>
 					<input type = "number" name = "zoom" value = {this.state.zoom} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+					Color:<br/>
+					<input type = "number" name = "color" value = {this.state.color} onChange = {this.handleChanges}  onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 				</form>
-				
+				<button name = "reset" onClick = {this.reset}>Reset</button>
     			</div>
 		);
   	}
