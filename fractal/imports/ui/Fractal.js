@@ -49,26 +49,28 @@ export default class Fractal extends Component {
 		this.setState({generate: true})
 	}
 	handleClick(event) {
+		console.log([event.target.name][0]);
 		switch ([event.target.name][0]) {
 			case "up":
 				this.setState({pany: this.state.pany + 0.01});
+				break;
 			case "left":
 				this.setState({panx: this.state.panx - 0.01});
+				break;
 			case "right":
 				this.setState({panx: this.state.panx + 0.01});
-				console.log(this.state.panx);
+				break;
 			case "down":
 				this.setState({pany: this.state.pany - 0.01});
-				console.log(this.state.pany); 
+				break; 
 		}
+		this.generate();
 	}
 	onBlur() {
-		this.setState({focused: false});
-		console.log(this.state.focused);	
+		this.setState({focused: false});	
 	}
 	onFocus() {
 		this.setState({focused: true});
-		console.log(this.state.focused);
 	}
 	//Mandelbrot
 	generateMandelbrot(canvas, ctx) {
