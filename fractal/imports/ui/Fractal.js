@@ -129,24 +129,26 @@ export default class Fractal extends Component {
 	render() {
     		return (
 			<div className = "container">
-				<button name = "up" onClick = {this.handleClick}>Up</button>
-				<button name = "left" onClick = {this.handleClick}>Left</button>
-				<button name = "right" onClick = {this.handleClick}>Right</button>
-				<button name = "down" onClick = {this.handleClick}>Down</button>
 				<canvas ref = "canvas"/>
-				<form>
-					Resolution:<br/>
-					<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/>
-					x
-					<input type = "number" name = "height" value = {this.state.y} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
-					Iterations:<br/>
-					<input type = "number" name = "iterations" value = {this.state.iterations} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
-					Zoom:<br/>
-					<input type = "number" name = "zoom" value = {this.state.zoom} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
-					Color:<br/>
-					<input type = "number" name = "color" value = {this.state.color} onChange = {this.handleChanges}  onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
-				</form>
-				<button name = "reset" onClick = {this.reset}>Reset</button>
+				<div>
+					<button name = "up" onClick = {this.handleClick}>Up</button>
+                                	<button name = "left" onClick = {this.handleClick}>Left</button>
+                                	<button name = "right" onClick = {this.handleClick}>Right</button>
+                                	<button name = "down" onClick = {this.handleClick}>Down</button>
+					<form>
+						Resolution:<br/>
+						<input type = "number" name = "width" value = {this.state.x} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/>
+						x
+						<input type = "number" name = "height" value = {this.state.y} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+						Iterations:<br/>
+						<input type = "number" name = "iterations" value = {this.state.iterations} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+						Zoom:<br/>
+						<input type = "number" name = "zoom" value = {this.state.zoom} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+						Color:<br/>
+						<input type = "number" name = "color" value = {this.state.color} onChange = {this.handleChange}  onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+					</form>
+					<button name = "reset" onClick = {this.reset}>Reset</button>
+				</div>
     			</div>
 		);
   	}
