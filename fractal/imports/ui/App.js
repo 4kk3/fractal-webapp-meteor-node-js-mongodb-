@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Fractal from './Fractal.js';
 
 // App component - represents the whole app
