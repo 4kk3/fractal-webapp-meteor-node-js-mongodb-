@@ -8,6 +8,6 @@ class Share extends Component {
 
 export default withTracker(() => {
 	return {
-		console.log(SavedFractals.find({}).fetch();
+		<li>{SavedFractals.find({}).fetch()}</li>
 	};
-});
+})(Share);
