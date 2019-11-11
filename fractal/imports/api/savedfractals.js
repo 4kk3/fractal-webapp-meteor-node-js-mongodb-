@@ -1,3 +1,3 @@
 import {Mongo} from 'meteor/mongo';
 
-export const savedfractals = new Mongo.Collection('savedfractals');
+export const SavedFractals = new Mongo.Collection('savedfractals');

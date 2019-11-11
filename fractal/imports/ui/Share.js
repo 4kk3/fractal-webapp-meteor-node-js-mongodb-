@@ -3,11 +3,13 @@ import {withTracker} from 'meteor/react-meteor-data';
 import {SavedFractals} from '../api/savedfractals.js';
 
 class Share extends Component {
-	
+	render() {
+		return null;	
+	}	
 }
 
 export default withTracker(() => {
-	return {
-		<li>{SavedFractals.find({}).fetch()}</li>
-	};
+	const fractals = SavedFractals.find({}).fetch();
+	console.log(fractals);
+	return {}
 })(Share);
