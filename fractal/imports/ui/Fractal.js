@@ -13,6 +13,7 @@ export default class Fractal extends Component {
 			panx: 3,
 			pany: 1.35,
 			color: 0,
+			fractalvalues: [],
 			resetvalues: []
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -38,6 +39,8 @@ export default class Fractal extends Component {
 	componentDidUpdate() {
 		if (this.state.generate == true && this.state.focused == false) {
 			this.generate();
+			console.log("generation done");
+		
 		}
 	}
 	generate() {
