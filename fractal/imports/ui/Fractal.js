@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {SavedFractals} from '../api/savedfractals.js';
 
 export default class Fractal extends Component {
 	constructor(props) {
@@ -24,6 +25,7 @@ export default class Fractal extends Component {
 		this.onFocus = this.onFocus.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.reset = this.reset.bind(this);
+		this.save = this.save.bind(this);
  	}
 	componentDidMount() {
 		this.setState({resetvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
@@ -39,8 +41,6 @@ export default class Fractal extends Component {
 	componentDidUpdate() {
 		if (this.state.generate == true && this.state.focused == false) {
 			this.generate();
-			console.log("generation done");
-		
 		}
 	}
 	generate() {
@@ -53,7 +53,7 @@ export default class Fractal extends Component {
 	}
 	handleChange(event) {
 		this.setState({[event.target.name]: event.target.value});
-		this.setState({generate: true})
+		this.setState({generate: true});
 	}
 	handleClick(event) {
 		switch ([event.target.name][0]) {
@@ -81,6 +81,13 @@ export default class Fractal extends Component {
 		this.setState({pany: this.state.resetvalues[5]});
 		this.setState({color: this.state.resetvalues[6]});
 		this.generate();
+	}
+	save() {
+		this.setState({fractalvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
+		SavedFractals.insert({
+			this.state.fractalvalues,
+			createdAt: new Date(),
+		});
 	}
 	onBlur() {
 		this.setState({focused: false});	
@@ -151,6 +158,7 @@ export default class Fractal extends Component {
 						<input type = "number" name = "color" value = {this.state.color} onChange = {this.handleChange}  onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 					</form>
 					<button name = "reset" onClick = {this.reset}>Reset</button>
+					<button name = "save" onClick = {this.save}>Save</button>
 				</div>
     			</div>
 		);
