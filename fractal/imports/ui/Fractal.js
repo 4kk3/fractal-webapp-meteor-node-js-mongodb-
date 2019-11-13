@@ -53,6 +53,7 @@ export default class Fractal extends Component {
 	}
 	handleChange(event) {
 		this.setState({[event.target.name]: event.target.value});
+		console.log(this.state.color);
 		this.setState({generate: true});
 	}
 	handleClick(event) {
@@ -85,7 +86,7 @@ export default class Fractal extends Component {
 	save() {
 		this.setState({fractalvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
 		SavedFractals.insert({
-			this.state.fractalvalues,
+			fractalvalues: this.state.fractalvalues,
 			createdAt: new Date(),
 		});
 	}
