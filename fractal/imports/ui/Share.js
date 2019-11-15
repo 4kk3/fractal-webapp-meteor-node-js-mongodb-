@@ -9,7 +9,7 @@ class Share extends Component {
 }
 
 export default withTracker(() => {
-	const fractals = SavedFractals.find({}).fetch();
-	console.log(fractals);
+	const fractals = SavedFractals.find().fetch();
+	console.log(fractals[39]['fractalvalues']);
 	return {}
 })(Share);

@@ -6,6 +6,7 @@ export default class Fractal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			name: "untitled",
 			width: 1920,
 			height: 1080,
 			iterations: 100,
@@ -85,8 +86,9 @@ export default class Fractal extends Component {
 	}
 	save() {
 		this.setState({fractalvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
-		var png = ReImg.fromCanvas(this.refs.canvas)
+		//var png = ReImg.fromCanvas(this.refs.canvas).toPng();
 		SavedFractals.insert({
+			name: this.state.name,
 			fractalvalues: this.state.fractalvalues,
 			createdAt: new Date(),
 		});
@@ -143,9 +145,9 @@ export default class Fractal extends Component {
 			<div className = "container">
 				<canvas ref = "canvas"/>
 				<div>
-					<Helmet>
-                                        	<script src = "reimg.js"></script>
-                                	</Helmet>
+					//<Helmet>
+                                        //	<script src = "reimg.js"></script>
+                                	//</Helmet>
 					<button name = "up" onClick = {this.handleClick}>Up</button>
                                 	<button name = "left" onClick = {this.handleClick}>Left</button>
                                 	<button name = "right" onClick = {this.handleClick}>Right</button>
@@ -161,6 +163,8 @@ export default class Fractal extends Component {
 						<input type = "number" name = "zoom" value = {this.state.zoom} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 						Color:<br/>
 						<input type = "number" name = "color" value = {this.state.color} onChange = {this.handleChange}  onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
+						Name:<br/>
+						<input type = "text" name = "name" value = {this.state.name} onChange = {this.handleChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/><br/>
 					</form>
 					<button name = "reset" onClick = {this.reset}>Reset</button>
 					<button name = "save" onClick = {this.save}>Save</button>
