@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {SavedFractals} from '../api/savedfractals.js';
+import {Helmet} from 'react-helmet';
 
 export default class Fractal extends Component {
 	constructor(props) {
@@ -53,7 +54,6 @@ export default class Fractal extends Component {
 	}
 	handleChange(event) {
 		this.setState({[event.target.name]: event.target.value});
-		console.log(this.state.color);
 		this.setState({generate: true});
 	}
 	handleClick(event) {
@@ -85,6 +85,7 @@ export default class Fractal extends Component {
 	}
 	save() {
 		this.setState({fractalvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
+		var png = ReImg.fromCanvas(this.refs.canvas)
 		SavedFractals.insert({
 			fractalvalues: this.state.fractalvalues,
 			createdAt: new Date(),
@@ -142,6 +143,9 @@ export default class Fractal extends Component {
 			<div className = "container">
 				<canvas ref = "canvas"/>
 				<div>
+					<Helmet>
+                                        	<script src = "reimg.js"></script>
+                                	</Helmet>
 					<button name = "up" onClick = {this.handleClick}>Up</button>
                                 	<button name = "left" onClick = {this.handleClick}>Left</button>
                                 	<button name = "right" onClick = {this.handleClick}>Right</button>
