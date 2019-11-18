@@ -5,14 +5,14 @@ import Share from './Share.js';
 // App component - represents the whole app
 
 export default class App extends Component {
-  	render() {
+	render() {
     		return (
       			<div className="container">
         			<header>
           				<h1>Fractal</h1>
         			</header>
 				<Fractal/>
-				<Share/>
+				<Share firstrun = {true}/>
       			</div>
     		);
   	}

@@ -28,6 +28,7 @@ export default class Fractal extends Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.reset = this.reset.bind(this);
 		this.save = this.save.bind(this);
+		this.savetodatabase = this.savetodatabase.bind(this);
  	}
 	componentDidMount() {
 		this.setState({resetvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
@@ -85,13 +86,14 @@ export default class Fractal extends Component {
 		this.generate();
 	}
 	save() {
-		this.setState({fractalvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
+		this.setState({fractalvalues: [this.state.name, this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]}, this.savetodatabase(this.state.fractalvalues));
 		//var png = ReImg.fromCanvas(this.refs.canvas).toPng();
+	}
+	savetodatabase(data) {
 		SavedFractals.insert({
-			name: this.state.name,
-			fractalvalues: this.state.fractalvalues,
-			createdAt: new Date(),
-		});
+                        fractalvalues: data,
+                        createdAt: new Date(),
+                });	
 	}
 	onBlur() {
 		this.setState({focused: false});	
