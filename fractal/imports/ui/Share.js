@@ -9,12 +9,8 @@ class Share extends Component {
 }
 
 export default withTracker(() => {
-	firstrun = this.props.firstrun;
-	if (firstrun == false) {
-		const fractals = SavedFractals.find().fetch();
-		console.log("dfggfgfgf");
-		console.log(fractals);
-		return {}
-	}
-	firstrun = false;
+	const fractals = SavedFractals.find().fetch();
+	console.log("dfggfgfgf");
+	console.log(fractals);
+	return {}
 })(Share);
