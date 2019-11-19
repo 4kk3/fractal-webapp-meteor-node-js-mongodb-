@@ -86,12 +86,13 @@ export default class Fractal extends Component {
 		this.generate();
 	}
 	save() {
-		this.setState({fractalvalues: [this.state.name, this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]}, this.savetodatabase(this.state.fractalvalues));
+		this.setState({fractalvalues: [this.state.name, this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]}, this.savetodatabase);
 		//var png = ReImg.fromCanvas(this.refs.canvas).toPng();
 	}
-	savetodatabase(data) {
+	savetodatabase = () => {
+		const {fractalvalues} = this.state;
 		SavedFractals.insert({
-                        fractalvalues: data,
+                        fractalvalues,
                         createdAt: new Date(),
                 });	
 	}
