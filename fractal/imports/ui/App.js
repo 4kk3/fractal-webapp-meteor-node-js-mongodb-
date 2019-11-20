@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Fractal from './Fractal.js';
-import Share from './Share.js';
-
+import {withTracker} from 'meteor/react-meteor-data';
+import {SavedFractals} from '../api/savedfractals.js';
 // App component - represents the whole app
 
-export default class App extends Component {
+class App extends Component {
 	render() {
     		return (
       			<div className="container">
@@ -12,8 +12,13 @@ export default class App extends Component {
           				<h1>Fractal</h1>
         			</header>
 				<Fractal/>
-				<Share firstrun = {true}/>
       			</div>
     		);
   	}
 }
+
+export default withTracker(() => {
+        const fractals = SavedFractals.find().fetch();
+        console.log(fractals);
+        return {}
+})(App);
