@@ -25,11 +25,20 @@ class App extends Component {
 
 export default withTracker(() => {
         const fractals = SavedFractals.find().fetch();
-	console.log(fractals);
-	for (i = 0; i < fractals.length - 1; i++) {
-                console.log(fractals[i]);
-                console.log(Object.values(fractals[i])[1]);
+	var arraycheck;
+	for (i = 0; i < fractals.length; i++) {
+		if (i == fractals.length - 1) {
+			arraycheck = listoffractalpresets.includes(Object.values(fractals[i])[0])
+			if (arraycheck != true) {
+				this.setState({listoffractalpresets
+				this.setState({zoom: this.state.resetvalues[3]});
+			}
+			console.log(Object.values(fractals[i])[0]); 
+		}
+		else {
+			console.log(Object.values(fractals[i])[1]); 
+		}
         }
-	console.log(Object.values(fractals[fractals.length])[0]);
+
         return {}
 })(App);
