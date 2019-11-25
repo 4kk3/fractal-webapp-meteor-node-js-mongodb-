@@ -12,6 +12,23 @@ class App extends Component {
                 };
 	}
 	render() {
+		console.log(this.props.databasevalues);
+		var listexceptionvalue;
+		var i;
+		for (i = 0; i < this.props.databasevalues.length; i++) {
+			if (i == this.props.databasevalues.length - 1) {
+				listexceptionvalue = 0;
+			}
+			else {
+				listexceptionvalue = 1;
+			}
+			if (this.state.listoffractalpresets.includes(Object.values(this.props.databasevalues[i])[listexceptionvalue]) != true) {
+				this.setState(prevState => ({
+  					listoffractalpresets: [...prevState.listoffractalpresets, Object.values(this.props.databasevalues[i])[listexceptionvalue]]
+				}))
+			}
+
+		}
     		return (
       			<div className="container">
         			<header>
@@ -24,21 +41,7 @@ class App extends Component {
 }
 
 export default withTracker(() => {
-        const fractals = SavedFractals.find().fetch();
-	var arraycheck;
-	for (i = 0; i < fractals.length; i++) {
-		if (i == fractals.length - 1) {
-			arraycheck = listoffractalpresets.includes(Object.values(fractals[i])[0])
-			if (arraycheck != true) {
-				this.setState({listoffractalpresets
-				this.setState({zoom: this.state.resetvalues[3]});
-			}
-			console.log(Object.values(fractals[i])[0]); 
-		}
-		else {
-			console.log(Object.values(fractals[i])[1]); 
-		}
-        }
-
-        return {}
+        return {
+		databasevalues: SavedFractals.find().fetch(),
+	};
 })(App);
