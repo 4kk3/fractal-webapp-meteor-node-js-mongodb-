@@ -11,24 +11,25 @@ class App extends Component {
                 	listoffractalpresets: []
                 };
 	}
-	render() {
-		console.log(this.props.databasevalues);
-		var listexceptionvalue;
-		var i;
-		for (i = 0; i < this.props.databasevalues.length; i++) {
-			if (i == this.props.databasevalues.length - 1) {
-				listexceptionvalue = 0;
-			}
-			else {
-				listexceptionvalue = 1;
-			}
-			if (this.state.listoffractalpresets.includes(Object.values(this.props.databasevalues[i])[listexceptionvalue]) != true) {
-				this.setState(prevState => ({
-  					listoffractalpresets: [...prevState.listoffractalpresets, Object.values(this.props.databasevalues[i])[listexceptionvalue]]
-				}))
-			}
+	componentDidUpdate() {
+                var listexceptionvalue;
+                var i;
+                for (i = 0; i < this.props.databasevalues.length; i++) {
+                        if (i == this.props.databasevalues.length - 1) {
+                                listexceptionvalue = 0;
+                        }
+                        else {
+                                listexceptionvalue = 1;
+                        }
+                        if (this.state.listoffractalpresets.includes(Object.values(this.props.databasevalues[i])[listexceptionvalue]) != true) {
+                                this.setState(prevState => ({
+                                        listoffractalpresets: [...prevState.listoffractalpresets, Object.values(this.props.databasevalues[i])[listexceptionvalue]]
+                                }))
+                        }
 
-		}
+                }
+        }
+	render() {
     		return (
       			<div className="container">
         			<header>
