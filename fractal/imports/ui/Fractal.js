@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {SavedFractals} from '../api/savedfractals.js';
-import {Helmet} from 'react-helmet';
 
 export default class Fractal extends Component {
 	constructor(props) {
@@ -87,7 +86,6 @@ export default class Fractal extends Component {
 	}
 	save() {
 		this.setState({fractalvalues: [this.state.name, this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]}, this.savetodatabase);
-		//var png = ReImg.fromCanvas(this.refs.canvas).toPng();
 	}
 	savetodatabase = () => {
 		const {fractalvalues} = this.state;
@@ -143,14 +141,12 @@ export default class Fractal extends Component {
     		}
     		return 0;   // Return zero if in set        
 	}       
+
 	render() {
     		return (
 			<div className = "container">
 				<canvas ref = "canvas"/>
 				<div>
-					//<Helmet>
-                                        //	<script src = "reimg.js"></script>
-                                	//</Helmet>
 					<button name = "up" onClick = {this.handleClick}>Up</button>
                                 	<button name = "left" onClick = {this.handleClick}>Left</button>
                                 	<button name = "right" onClick = {this.handleClick}>Right</button>
