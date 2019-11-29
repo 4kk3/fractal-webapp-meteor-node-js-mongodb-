@@ -11,7 +11,7 @@ export default class App extends Component {
           				<h1>Fractal</h1>
         			</header>
 				<Fractal/>
-				<Share/>
+				<Share triggerParentUpdate = this.senddown/>
       			</div>
     		);
   	}
