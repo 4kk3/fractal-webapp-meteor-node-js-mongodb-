@@ -12,6 +12,7 @@ export default class Fractal extends Component {
 			zoom: 400,
 			focused: false,
 			generate: false,
+			presetgenerated: false,
 			panx: 3,
 			pany: 1.35,
 			color: 0,
@@ -85,7 +86,7 @@ export default class Fractal extends Component {
 		this.generate();
 	}
 	save() {
-		this.setState({fractalvalues: [this.state.name, this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]}, this.savetodatabase);
+		this.setState({fractalvalues: [this.state.name, this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color, this.state.presetgenerated]}, this.savetodatabase);
 	}
 	savetodatabase = () => {
 		const {fractalvalues} = this.state;
