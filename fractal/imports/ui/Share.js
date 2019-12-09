@@ -19,10 +19,11 @@ class Share extends Component {
 		}
 	}
 	
-	updatepresetcount() {
+	updatepresetcount = () => {
 		this.setState({presetcount: this.state.presetcount + 1});
 		console.log(this.state.presetcount);
 	}
+
 	renderpreset(fractalvalues) {
 		return (
 			<FractalPreset fractalvalues = {fractalvalues}/>
