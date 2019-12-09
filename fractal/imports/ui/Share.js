@@ -14,13 +14,14 @@ class Share extends Component {
 
 	componentDidUpdate() {
 		while (this.state.presetcount != this.props.savedfractals.length) {
-			this.renderpreset(Object.values(this.props.savedfractals[this.state.presetcount])[1]);
-			this.updateprestcount();
+			this.renderpreset(Object.values(this.props.savedfractals[this.state.presetcount]));
+			this.updatepresetcount();
 		}
 	}
 	
 	updatepresetcount() {
 		this.setState({presetcount: this.state.presetcount + 1});
+		console.log(this.state.presetcount);
 	}
 	renderpreset(fractalvalues) {
 		return (
