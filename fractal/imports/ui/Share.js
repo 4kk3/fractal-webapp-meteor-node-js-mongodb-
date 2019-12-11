@@ -9,10 +9,11 @@ class Share extends Component {
 		this.state = {
 			presetcount: 0	
 		};
-		this.updatepresetcount = this.updatepresetcount.bind(this);
+		this.renderpreset = this.renderpreset.bind(this);
 	}
 
 	componentDidUpdate() {
+<<<<<<< HEAD
 		while (this.state.presetcount != this.props.savedfractals.length) {
 			this.renderpreset(Object.values(this.props.savedfractals[this.state.presetcount]));
 			this.updatepresetcount();
@@ -22,12 +23,23 @@ class Share extends Component {
 	updatepresetcount = () => {
 		this.setState({presetcount: this.state.presetcount + 1});
 		console.log(this.state.presetcount);
+=======
+		if (this.state.presetcount < this.props.savedfractals.length) {
+			var i = this.state.presetcount
+			while (i < this.props.savedfractals.length) {
+				this.renderpreset(Object.values(this.props.savedfractals[i]));
+				i++;
+			}
+			this.setState({presetcount: i});
+		}
+	}
+	sharesendup() {
+		this.props.triggerParentUpdate;
+>>>>>>> working on database
 	}
 
 	renderpreset(fractalvalues) {
-		return (
-			<FractalPreset fractalvalues = {fractalvalues}/>
-		);
+		return <FractalPreset fractalvalues = {fractalvalues} triggerParentUpdate = {this.sharesendup} />;
 	}
 
         render() {
