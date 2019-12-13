@@ -13,17 +13,6 @@ class Share extends Component {
 	}
 
 	componentDidUpdate() {
-<<<<<<< HEAD
-		while (this.state.presetcount != this.props.savedfractals.length) {
-			this.renderpreset(Object.values(this.props.savedfractals[this.state.presetcount]));
-			this.updatepresetcount();
-		}
-	}
-	
-	updatepresetcount = () => {
-		this.setState({presetcount: this.state.presetcount + 1});
-		console.log(this.state.presetcount);
-=======
 		if (this.state.presetcount < this.props.savedfractals.length) {
 			var i = this.state.presetcount
 			while (i < this.props.savedfractals.length) {
@@ -35,7 +24,6 @@ class Share extends Component {
 	}
 	sharesendup() {
 		this.props.triggerParentUpdate;
->>>>>>> working on database
 	}
 
 	renderpreset(fractalvalues) {
