@@ -10,16 +10,15 @@ export default class FractalPreset extends Component {
         savetodatabase = () => {
                 SavedFractals.update(this.props.fractalvalues[0], {
          		$set: { fractalvalues: [presetgenerated: true]},
-                });     
+                });
+		this.props.triggerParentUpdate();
+		console.log("dfsg");     
         }
-	test() {
-		console.log("dggdsf");
-	}
 	render() {
 		console.log("loL");
                 return (
                         <div className="container">
-				<a onClick = {this.test} onClick = {this.props.triggerParentUpdate}>{this.props.fractalvalues[1][0]}</a>
+				<a onClick = {this.savetodatabase}>{this.props.fractalvalues[1][0]}</a>
                         </div>
                 );
         }
