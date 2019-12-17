@@ -67,8 +67,8 @@ class Fractal extends Component {
 		}
 	}
 	returnpresetboolean(fractalid){
-                SavedFractals.update(fractalid, {
-         		$set: { fractalvalues: [presetgenerated: false]},
+		SavedFractals.update(fractalid, {
+                        $set: { fractalvalues.8: false },
                 });     
 	}
 	generate() {

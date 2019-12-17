@@ -9,7 +9,7 @@ export default class FractalPreset extends Component {
         }
         savetodatabase = () => {
                 SavedFractals.update(this.props.fractalvalues[0], {
-         		$set: { fractalvalues: [presetgenerated: true]},
+         		$set: { fractalvalues.8: true },
                 });
 		this.props.triggerParentUpdate();
 		console.log("dfsg");     
