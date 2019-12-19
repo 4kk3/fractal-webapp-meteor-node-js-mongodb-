@@ -11,30 +11,20 @@ class Share extends Component {
 		};
 		//this.renderpreset = this.renderpreset.bind(this);
 		this.sharesendup = this.sharesendup.bind(this);
+		this.render = this.render.bind(this);
 	}
 
 	sharesendup() {
-		this.props.triggerParentUpdate;
+		console.log("dsfg");
+		this.props.triggerParentUpdate();
 	}
 
-	//renderpreset(fractalvalues) {
-	//	return <FractalPreset fractalvalues = {fractalvalues} triggerParentUpdate = {this.sharesendup} />;
-	//}
-
         render() {
-		//if (this.state.presetcount < this.props.savedfractals.length) {
-                        //var i = this.state.presetcount
-                       // while (i < this.props.savedfractals.length) {
-                      //          this.renderpreset(Object.values(this.props.savedfractals[i]));
-                    //            i++;
-                  //      }
-                //        this.setState({presetcount: i});
-                //}
                 return (
                         <div className="container">
 				{this.props.savedfractals.map(function(fractalvalues, i) {
-					return <FractalPreset fractalvalues = {Object.values(fractalvalues)} key = {i}/>
-				})}
+					return <FractalPreset triggerParentUpdate = {this.sharesendup} fractalvalues = {Object.values(fractalvalues)} key = {i}/>
+				}, this)}
                         </div>
                 );
         }

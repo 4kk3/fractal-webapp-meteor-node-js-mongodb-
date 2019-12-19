@@ -51,7 +51,7 @@ class Fractal extends Component {
 	signalchild() {
 		var i = 0;
 		while (i < this.props.savedfractals.length) {
-			if (Object.values(this.props.savedfractals[i])[1][8]) {
+			if (Object.values(this.props.savedfractals[i])[1][8] == true) {
 				this.setState({width: Object.values(this.props.savedfractals[i])[1][0]});
                 		this.setState({height: Object.values(this.props.savedfractals[i])[1][1]});
                 		this.setState({iterations: Object.values(this.props.savedfractals[i])[1][2]});
@@ -67,9 +67,9 @@ class Fractal extends Component {
 		}
 	}
 	returnpresetboolean(fractalid){
-		SavedFractals.update(fractalid, {
-                        $set: { fractalvalues.8: false },
-                });     
+		Tasks.remove(this.props.fractalvalues[0]);
+                this.setState({fractalvalues: [this.state.fractalvalues[0], this.state.fractalvalues[1], this.state.fractalvalues[2], this.state.fractalvalues[3], this.state.fractalvalues[4], this.state.fractalvalues[5], this.fractalvalues[6], this.fractalvalues[7], false]});                
+		this.savetodatabase();
 	}
 	generate() {
 		var canvas = this.refs.canvas;
