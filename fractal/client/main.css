@@ -3,10 +3,10 @@ body {
 	font-family: sans-serif;
 	text-align: center;
 	background-color: #000000;
+	color: #FFFFFF;
 }
 
 input {
-	color: #FFFFFF;
 	background-color : #A9A9A9;
 	border: none;
 	

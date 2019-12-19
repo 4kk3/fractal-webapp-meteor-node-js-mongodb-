@@ -33,6 +33,7 @@ class Fractal extends Component {
 		this.signalchild = this.signalchild.bind(this);
  	}
 	componentDidMount() {
+		this.props.onRef(this);
 		this.setState({resetvalues: [this.state.width, this.state.height, this.state.iterations, this.state.zoom, this.state.panx, this.state.pany, this.state.color]})
 		//Instantiate Canvas
                 var canvas = this.refs.canvas;
@@ -47,6 +48,9 @@ class Fractal extends Component {
 		if (this.state.generate == true && this.state.focused == false) {
 			this.generate();
 		}
+	}
+	componentWillUnmount() {
+		this.props.onRef(undefined);
 	}
 	signalchild() {
 		var i = 0;
